@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { plus, equal } from '../assets';
 import styles from '../style';
-import handleInputValues from '../scripts/testnumbers';
+import {handleInputValues, vpnChange} from '../scripts/testnumbers';
 
 /**
  * Vas is a component that displays a virtual address space.
@@ -12,16 +12,48 @@ const Vas = () => {
   const [pages, setPages] = useState(Array(30).fill(null));
   const [vpn, setVpn] = useState('');
   const [offset, setOffset] = useState('');
+  const [VAL, setVAL] = useState('');
+
+  // All three functions are updating the graphics with user input
+  // and passing them to another function 
+
 
   const handleVpnChange = (event) => {
-    setVpn(event.target.value);
-    handleInputValues(event.target.value, offset);
+    console.log("test:",event.target.value);
+    const [x, y, z] = vpnChange(event.target.value, offset, VAL);
+
+    setVpn(x);
+    setOffset(y);
+    setVAL(z);
+
+    console.log('VPN:', vpn);
+    console.log('Offset:', offset);
+    console.log('VAL:', VAL);
   };
+  // const handleVpnChange = (event) => {
+  //   setVpn(event.target.value);
+  //   console.log('VPN:', vpn);
+  //   console.log('Offset:', offset);
+  //   console.log('VAL:', VAL);
+  // };
+
   
   const handleOffsetChange = (event) => {
     setOffset(event.target.value);
-    handleInputValues(vpn, event.target.value);
+    console.log('VPN:', vpn);
+    console.log('Offset:', offset);
+    console.log('VAL:', VAL)
+    // handleInputValues(vpn, event.target.value, VAL);
   };
+
+  const handleVALChange = (event) => {
+    setVAL(event.target.value)
+    setOffset(event.target.value);
+    console.log('VPN:', vpn);
+    console.log('Offset:', offset);
+    console.log('VAL:', VAL)
+    // handleInputValues(vpn, offset, event.target.value)
+  }
   
 
   return (
@@ -33,19 +65,19 @@ const Vas = () => {
         {/* VPN */}
         <div>
           <label htmlFor="vpn" className="block text-sm font-bold mb-2">VPN:</label>
-          <input id="vpn" type="text" onChange={handleVpnChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+          <input id="vpn" type="text" value={vpn} onChange={handleVpnChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
         <img src={plus} alt="plus" className={`${styles.arithmetic}`} />
         {/* Offset */}
         <div>
           <label htmlFor="offset" className="block text-sm font-bold mb-2">Offset:</label>
-          <input id="offset" type="text" onChange={handleOffsetChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+          <input id="offset" type="text" value={offset} onChange={handleOffsetChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
         <img src={equal} alt="equal" className={`${styles.arithmetic}`} />
         {/* VA Length */}
         <div>
           <label htmlFor="valength" className="block text-sm font-bold mb-2">VA Length:</label>
-          <input id="valength" type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+          <input id="valength" type="text" value={VAL} onChange={handleVALChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
       </div>
 
