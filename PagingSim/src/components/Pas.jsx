@@ -11,7 +11,7 @@ const Pas = () => {
     <div className='bg-seafoam w-[850] h-[400] rounded-lg'>
       {/* Display the title */}
       <span className="text-[24px] font-inter ml-5">Physical Address Space</span>
-      {/* Calculation Row */}
+      {/* Calculation Row */} 
       <div className="flex items-center ml-5">
         {/* PFN */}
         <div>
