@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { plus, equal } from '../assets';
 import styles from '../style';
+import handleInputValues from '../scripts/testnumbers';
 
 /**
  * Vas is a component that displays a virtual address space.
@@ -9,7 +10,19 @@ const Vas = () => {
 
   // Create an array of 10 elements to represent the pages in the virtual address space
   const [pages, setPages] = useState(Array(30).fill(null));
+  const [vpn, setVpn] = useState('');
+  const [offset, setOffset] = useState('');
 
+  const handleVpnChange = (event) => {
+    setVpn(event.target.value);
+    handleInputValues(event.target.value, offset);
+  };
+  
+  const handleOffsetChange = (event) => {
+    setOffset(event.target.value);
+    handleInputValues(vpn, event.target.value);
+  };
+  
 
   return (
     <div className='bg-seafoam w-[850] h-[400] rounded-lg'>
@@ -20,13 +33,13 @@ const Vas = () => {
         {/* VPN */}
         <div>
           <label htmlFor="vpn" className="block text-sm font-bold mb-2">VPN:</label>
-          <input id="vpn" type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+          <input id="vpn" type="text" onChange={handleVpnChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
         <img src={plus} alt="plus" className={`${styles.arithmetic}`} />
         {/* Offset */}
         <div>
           <label htmlFor="offset" className="block text-sm font-bold mb-2">Offset:</label>
-          <input id="offset" type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+          <input id="offset" type="text" onChange={handleOffsetChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
         <img src={equal} alt="equal" className={`${styles.arithmetic}`} />
         {/* VA Length */}
