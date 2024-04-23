@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 import PageTableEntry from '../scripts/classes/PageTableEntry';
 import styles from '../style';
+import {checkValue} from '../scripts/Functions';
 
 const PageTable = () => {
 
   // Initialize the pageTable array with 10 PageTableEntry objects
-  // Changed the VPN and PFN to be in binary
-  const [pageTable, setPageTable] = useState(Array(10).fill().map((_, i) => new PageTableEntry(i.toString(2), i.toString(2), true)));
+  // Changed the VPN and PFN to be in binary, TODO, have all binary numbers be the same length
+  const [pageTable, setPageTable] = useState(Array(10).fill().map((_, i) => new PageTableEntry(i.toString(2), i, true)));
+  const [Size, setSize] = useState('0');
+  const [pte, setPte] = useState('0');
+
+
+  const handlePteChange = (event) => {
+    let value = checkValue(event.target.value, pte);
+    setPte(value);
+    // Sets the PTEs to be the same as the PTE number
+    setPageTable(Array(value).fill(null).map((_, i) => new PageTableEntry(i.toString(2), i, true)));
+
+  }
   
   return (
     <div className='bg-seafoam rounded-lg flex flex-col items-start p-4'>
@@ -19,7 +31,7 @@ const PageTable = () => {
       {/* PTE */}
       <div className="flex items-center mb-3">
         <label htmlFor="pte" className="mr-2">PTE:</label>
-        <input id="pte" type="text" className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        <input id="pte" type="text" value={pte} onChange={handlePteChange} className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
       </div>
 
       {/* Display the page table */}
