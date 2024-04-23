@@ -5,7 +5,8 @@ import styles from '../style';
 const PageTable = () => {
 
   // Initialize the pageTable array with 10 PageTableEntry objects
-  const [pageTable, setPageTable] = useState(Array(10).fill().map((_, i) => new PageTableEntry(i, i, true)));
+  // Changed the VPN and PFN to be in binary
+  const [pageTable, setPageTable] = useState(Array(10).fill().map((_, i) => new PageTableEntry(i.toString(2), i.toString(2), true)));
   
   return (
     <div className='bg-seafoam rounded-lg flex flex-col items-start p-4'>
