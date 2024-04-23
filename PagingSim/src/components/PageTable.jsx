@@ -5,7 +5,7 @@ import {checkValue} from '../scripts/Functions';
 
 const PageTable = () => {
 
-  // Initialize the pageTable array with 10 PageTableEntry objects
+  // Initialize the pageTable array with 10 PageTableEntry objects 
   // Changed the VPN and PFN to be in binary, TODO, have all binary numbers be the same length
   const [pageTable, setPageTable] = useState(Array(10).fill().map((_, i) => new PageTableEntry(i.toString(2), i, true)));
   const [Size, setSize] = useState('0');
