@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { plus, equal } from '../assets';
 import styles from '../style';
 import { calcValues, checkValue, calcSizes, test } from '../scripts/Functions';
+import { Context } from './Context';
 
 const Pas = () => {
   // Create an array of 10 elements to represent the pages in the virtual address space
+
+  const { vpn, setVpn, pfn, setPfn, offset, setOffset } = React.useContext(Context);
   const [pages, setPages] = useState(Array(20).fill(null));
-  const [pfn, setPfn] = useState('0');
-  const [offset, setOffset] = useState('0');
+  // const [pfn, setPfn] = useState('0');
+  // const [offset, setOffset] = useState('0');
   const [PAL, setPAL] = useState('0');
   // Flag to indicate if values need to be reset or not
   const [resetFLag, setFlag] = useState(0);

@@ -3,16 +3,18 @@ import { plus, equal } from '../assets';
 import styles from '../style';
 import { calcValues, checkValue, calcSizes, test } from '../scripts/Functions';
 // import { pfn, pfsetPfnn } from './Pas';
+import { Context } from './Context';
+
 
 /**
  * Vas is a component that displays a virtual address space.
  */
 const Vas = () => {
-
+  const { vpn, setVpn, pfn, setPfn, offset, setOffset } = React.useContext(Context);
   // Create an array of 10 elements to represent the pages in the virtual address space
   const [pages, setPages] = useState(Array(30).fill(null));
-  const [vpn, setVpn] = useState('0');
-  const [offset, setOffset] = useState('0');
+  // const [vpn, setVpn] = useState('0');
+  // const [offset, setOffset] = useState('0');
   const [VAL, setVAL] = useState('0');
   // Flag to indicate if values need to be reset or not
   const [resetFLag, setFlag] = useState(0);
