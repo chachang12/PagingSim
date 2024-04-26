@@ -1,36 +1,55 @@
 import React, { useState } from 'react';
 import PageTableEntry from '../scripts/classes/PageTableEntry';
 import styles from '../style';
-import {checkValue} from '../scripts/Functions';
+import {checkValue, calcPTSizeAndPTE} from '../scripts/Functions';
+import { Context } from '../components/Context';
 
 const PageTable = () => {
+  const { vpn, setVpn, pfn, setPfn, offset, setOffset, VAL, setVAL, PAL, setPAL, pte, setPte} = React.useContext(Context);
+
 
   // Initialize the pageTable array with 10 PageTableEntry objects 
   // Changed the VPN and PFN to be in binary, TODO, have all binary numbers be the same length
-  const [pageTable, setPageTable] = useState(Array(10).fill().map((_, i) => new PageTableEntry(i.toString(2), i, true)));
+  const [pageTable, setPageTable] = useState(Array(10).fill().map((_, i) => new PageTableEntry(i, i, true)));
   const [Size, setSize] = useState('0');
-  const [pte, setPte] = useState('0');
 
+  const handleClick = () => {
+    console.log("button clicked");
+    // This logic will need to change
+    // if (vpn == 0 || pfn ==0 || ) {
+    //   alert("All values in VAS and PAS must be set and greater then 0.")
+    // }
+
+    let test = calcPTSizeAndPTE(vpn, pfn);
+    setSize(test[0]);
+    setPte(test[1]);
+
+  }
 
   const handlePteChange = (event) => {
     let value = checkValue(event.target.value, pte);
     setPte(value);
     // Sets the PTEs to be the same as the PTE number
-    setPageTable(Array(value).fill(null).map((_, i) => new PageTableEntry(i.toString(2), i, true)));
+    setPageTable(Array(value).fill(null).map((_, i) => new PageTableEntry(i, i, true)));
+  }
 
+  const handleSizeChange = (event) => {
+    console.log("sleirugh");
   }
   
   return (
     <div className='bg-seafoam rounded-lg flex flex-col items-start p-4'>
       <span className="text-[24px] font-inter mb-4">Page Table</span>
-      {/* Size */}
+      {/*button needs styling */}
+      <button id="calculate" onClick={handleClick} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">Calculate</button>
+      {/* PT Size */}
       <div className="flex items-center mb-2">
-        <label htmlFor="size" className="mr-2">Size:</label>
-        <input id="size" type="text" className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        <label htmlFor="size" className="mr-2">PT Size (btyes):</label>
+        <input id="size" type="text" value={Size} onchange={handleSizeChange} className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
       </div>
       {/* PTE */}
       <div className="flex items-center mb-3">
-        <label htmlFor="pte" className="mr-2">PTE:</label>
+        <label htmlFor="pte" className="mr-2">PTE Number:</label>
         <input id="pte" type="text" value={pte} onChange={handlePteChange} className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
       </div>
 

@@ -3,13 +3,18 @@ import {Pas, Vas, PageTable} from '../components';
 import { Context } from '../components/Context';
 
 const Feature = () => {
+  // declare new vars and set functions here
   const [vpn, setVpn] = useState('0');
   const [pfn, setPfn] = useState('0');
   const [offset, setOffset] = useState('0');
+  const [PAL, setPAL] = useState('0');
+  const [VAL, setVAL] = useState('0');
+  const [pte, setPte] = useState('0');
 
 
   return (
-    <Context.Provider value={{ vpn, setVpn, pfn, setPfn, offset, setOffset }}>
+    // Adding new varialbe, add var and set function here
+    <Context.Provider value={{ vpn, setVpn, pfn, setPfn, offset, setOffset, PAL, setPAL, VAL, setVAL, pte, setPte }}>
       <div className="flex">
         <div>
           {/* VAS */}

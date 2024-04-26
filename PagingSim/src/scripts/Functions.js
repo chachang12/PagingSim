@@ -56,8 +56,16 @@ export function calcSizes(vpn, offset, VAL) {
     let pageSize = Math.pow(2, offset);
     let vasSize = Math.pow(2, VAL);
 
-    // return { numPages, pageSize, vasSize }
     return [ numPages, pageSize, vasSize ]
+}
+
+export function calcPTSizeAndPTE(vpn, pfn) {
+    vpn = Number(vpn); // Convert vpn to a number
+    pfn = Number(pfn); // Convert pfn to a number
+    let pteNum = Math.pow(2, vpn);
+    let byteNum = Math.ceil((pfn + 1) / 8); // Corrected operator precedence
+    let ptSize = byteNum * pteNum;
+    return [ptSize, pteNum];
 }
 
 

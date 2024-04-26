@@ -10,12 +10,9 @@ import { Context } from './Context';
  * Vas is a component that displays a virtual address space.
  */
 const Vas = () => {
-  const { vpn, setVpn, pfn, setPfn, offset, setOffset } = React.useContext(Context);
+  const { vpn, setVpn, pfn, setPfn, offset, setOffset, VAL, setVAL } = React.useContext(Context);
   // Create an array of 10 elements to represent the pages in the virtual address space
   const [pages, setPages] = useState(Array(30).fill(null));
-  // const [vpn, setVpn] = useState('0');
-  // const [offset, setOffset] = useState('0');
-  const [VAL, setVAL] = useState('0');
   // Flag to indicate if values need to be reset or not
   const [resetFLag, setFlag] = useState(0);
   // Values for Page size and VAS size
@@ -70,12 +67,12 @@ const Vas = () => {
     setOffset(offset == '' ? 0 : offset);
     setVAL(VAL == '' ? 0 : VAL);
 
-
     // Function should stop and alert user if all three values are not 0
     if (vpn != 0 && offset != 0 && VAL != 0) {
       alert("At leat one value must be 0.")
       return;
     }
+
     // the set functions are delayed, so these new variables are used when the values are instantly needed
     const { vpn: newVpn, offset: newOffset, VAL: newVAL } = calcValues(vpn, offset, VAL);
     setVpn(newVpn);
@@ -84,10 +81,7 @@ const Vas = () => {
     setFlag(1);
 
     // Call function to set page number, size, and VAS size
-    // const { numPages: newNumPages, pageSize: newPageSize, vasSize: newVasSize } = calcSizes(newVpn, newOffset, newVAL);
-    // setPages(Array(newNumPages).fill(null));
-    // setPageSize(newPageSize);
-    // setVasSize(newVasSize);
+    // FIX THESE NAMES
     const tests = calcSizes(newVpn, newOffset, newVAL);
     setPages(Array(tests[0]).fill(null));
     setPageSize(tests[1]);

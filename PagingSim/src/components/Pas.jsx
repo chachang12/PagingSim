@@ -5,26 +5,23 @@ import { calcValues, checkValue, calcSizes, test } from '../scripts/Functions';
 import { Context } from './Context';
 
 const Pas = () => {
-  // Create an array of 10 elements to represent the pages in the virtual address space
 
-  const { vpn, setVpn, pfn, setPfn, offset, setOffset } = React.useContext(Context);
+  const { vpn, setVpn, pfn, setPfn, offset, setOffset, PAL, setPAL } = React.useContext(Context);   // Include new vars and set funcitons here
+  // Create an array of 10 elements to represent the pages in the virtual address space
   const [pages, setPages] = useState(Array(20).fill(null));
-  // const [pfn, setPfn] = useState('0');
-  // const [offset, setOffset] = useState('0');
-  const [PAL, setPAL] = useState('0');
   // Flag to indicate if values need to be reset or not
-  const [resetFLag, setFlag] = useState(0);
+  const [resetPFLag, setPFlag] = useState(0);
   // Values for Page Frame size and PAS size
   const [frameSize, setFrameSize] = useState(0);
   const [pasSize, setPasSize] = useState(0);
 
   // After the user calculates, once a value if changed, all other values are set to 0 so a new value can be calculated.
   function checkReset() {
-    if (resetFLag == 1) {
+    if (resetPFLag == 1) {
       setPfn(0);
       setOffset(0);
       setPAL(0);
-      setFlag(0);
+      setPFlag(0);
     }
   }
 
@@ -73,7 +70,7 @@ const Pas = () => {
     setPfn(newPfn);
     setOffset(newOffset);
     setPAL(newPAL);
-    setFlag(1);
+    setPFlag(1);
 
     const tests = calcSizes(newPfn, newOffset, newPAL);
     setPages(Array(tests[0]).fill(null));
