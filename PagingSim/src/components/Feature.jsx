@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {Pas, Vas, PageTable} from '../components';
 import { Context } from '../components/Context';
+import PageTableEntry from '../scripts/classes/PageTableEntry';
 
 const Feature = () => {
   // declare new vars and set functions here
@@ -10,11 +11,13 @@ const Feature = () => {
   const [PAL, setPAL] = useState('0');
   const [VAL, setVAL] = useState('0');
   const [pte, setPte] = useState('0');
+  const [pageTable, setPageTable] = useState(Array(pte).fill().map((_, i) => new PageTableEntry(i, i, true)));
+
 
 
   return (
     // Adding new varialbe, add var and set function here
-    <Context.Provider value={{ vpn, setVpn, pfn, setPfn, offset, setOffset, PAL, setPAL, VAL, setVAL, pte, setPte }}>
+    <Context.Provider value={{ vpn, setVpn, pfn, setPfn, offset, setOffset, PAL, setPAL, VAL, setVAL, pte, setPte, pageTable, setPageTable }}>
       <div className="flex">
         <div>
           {/* VAS */}

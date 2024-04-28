@@ -68,6 +68,15 @@ export function calcPTSizeAndPTE(vpn, pfn) {
     return [ptSize, pteNum];
 }
 
+export function calcFromPTE(VAL, PAL, pte) {
+    let vpn = Math.ceil(Math.log2(pte));
+    let offset = VAL - vpn
+    let pfn = PAL - offset
+    let byteNum = Math.ceil((pfn + 1) / 8); // Corrected operator precedence
+    let ptSize = byteNum * pte;
+
+    return [vpn, offset, pfn, ptSize];
+}
 
 
 export function test(vpn, offset, VAL) {

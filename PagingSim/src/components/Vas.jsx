@@ -4,13 +4,14 @@ import styles from '../style';
 import { calcValues, checkValue, calcSizes, test } from '../scripts/Functions';
 // import { pfn, pfsetPfnn } from './Pas';
 import { Context } from './Context';
+import PageTableEntry from '../scripts/classes/PageTableEntry';
 
 
 /**
  * Vas is a component that displays a virtual address space.
  */
 const Vas = () => {
-  const { vpn, setVpn, pfn, setPfn, offset, setOffset, VAL, setVAL } = React.useContext(Context);
+  const { vpn, setVpn, pfn, setPfn, offset, setOffset, VAL, setVAL, pte, setPte } = React.useContext(Context);
   // Create an array of 10 elements to represent the pages in the virtual address space
   const [pages, setPages] = useState(Array(30).fill(null));
   // Flag to indicate if values need to be reset or not

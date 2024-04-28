@@ -1,29 +1,32 @@
 import React, { useState } from 'react';
 import PageTableEntry from '../scripts/classes/PageTableEntry';
 import styles from '../style';
-import {checkValue, calcPTSizeAndPTE} from '../scripts/Functions';
+import {checkValue, calcPTSizeAndPTE, calcFromPTE} from '../scripts/Functions';
 import { Context } from '../components/Context';
 
 const PageTable = () => {
-  const { vpn, setVpn, pfn, setPfn, offset, setOffset, VAL, setVAL, PAL, setPAL, pte, setPte} = React.useContext(Context);
+  const { vpn, setVpn, pfn, setPfn, offset, setOffset, VAL, setVAL, PAL, setPAL, pte, setPte, pageTable, setPageTable} = React.useContext(Context);
 
 
   // Initialize the pageTable array with 10 PageTableEntry objects 
   // Changed the VPN and PFN to be in binary, TODO, have all binary numbers be the same length
-  const [pageTable, setPageTable] = useState(Array(10).fill().map((_, i) => new PageTableEntry(i, i, true)));
+  // const [pageTable, setPageTable] = useState(Array(10).fill().map((_, i) => new PageTableEntry(i, i, true)));
   const [Size, setSize] = useState('0');
 
   const handleClick = () => {
-    console.log("button clicked");
-    // This logic will need to change
-    // if (vpn == 0 || pfn ==0 || ) {
-    //   alert("All values in VAS and PAS must be set and greater then 0.")
-    // }
+    // I need to set up logic to determine which path is taken
+    if (VAL != 0 && PAL != 0 && pte !=0) {
+      let results = calcFromPTE(VAL, PAL, pte)
+      setVpn(results[0]);
+      setOffset(results[1]);
+      setPfn(results[2]);
+      setSize(results[3])
 
-    let test = calcPTSizeAndPTE(vpn, pfn);
-    setSize(test[0]);
-    setPte(test[1]);
-
+    } else {
+      let results = calcPTSizeAndPTE(vpn, pfn);
+      setSize(results[0]);
+      setPte(results[1]);
+    }
   }
 
   const handlePteChange = (event) => {
@@ -34,7 +37,8 @@ const PageTable = () => {
   }
 
   const handleSizeChange = (event) => {
-    console.log("sleirugh");
+    let value = checkValue(event.target.value, pte);
+    setSize(value)
   }
   
   return (
