@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { plus, equal } from '../assets';
 import styles from '../style';
-import { calcValues, checkValue, calcSizes, test } from '../scripts/Functions';
+import { calcValues, checkValue, calcSizes, converter } from '../scripts/Functions';
 // import { pfn, pfsetPfnn } from './Pas';
 import { Context } from './Context';
 import PageTableEntry from '../scripts/classes/PageTableEntry';
@@ -11,14 +11,14 @@ import PageTableEntry from '../scripts/classes/PageTableEntry';
  * Vas is a component that displays a virtual address space.
  */
 const Vas = () => {
-  const { vpn, setVpn, pfn, setPfn, offset, setOffset, VAL, setVAL, pte, setPte } = React.useContext(Context);
+  const { vpn, setVpn, pfn, setPfn, offset, setOffset, VAL, setVAL, pte, setPte, pageSize, setPageSize, vasSize, setVasSize, pagesV, setPagesV } = React.useContext(Context);
   // Create an array of 10 elements to represent the pages in the virtual address space
-  const [pages, setPages] = useState(Array(30).fill(null));
+  // const [pages, setPages] = useState(Array(30).fill(null));
   // Flag to indicate if values need to be reset or not
   const [resetFLag, setFlag] = useState(0);
   // Values for Page size and VAS size
-  const [pageSize, setPageSize] = useState(0);
-  const [vasSize, setVasSize] = useState(0);
+  // const [pageSize, setPageSize] = useState(0);
+  // const [vasSize, setVasSize] = useState(0);
 
   // After the user calculates, once a value if changed, all other values are set to 0 so a new value can be calculated.
   function checkReset() {
@@ -57,36 +57,34 @@ const Vas = () => {
 
   // Handles what happens on button press
   const handleClick = () => {
-    // debugging stuff
-    console.log('Button clicked!');
-    console.log('VPN:', vpn);
-    console.log('Offset:', offset);
-    console.log('VAL:', VAL);
-
     // If any value is an empty string, set it to 0
     setVpn(vpn == '' ? 0 : vpn);
     setOffset(offset == '' ? 0 : offset);
     setVAL(VAL == '' ? 0 : VAL);
 
     // Function should stop and alert user if all three values are not 0
-    if (vpn != 0 && offset != 0 && VAL != 0) {
-      alert("At leat one value must be 0.")
-      return;
-    }
+    // if (vpn != 0 && offset != 0 && VAL != 0) {
+    //   alert("At leat one value must be 0.")
+    //   return;
+    // }
 
     // the set functions are delayed, so these new variables are used when the values are instantly needed
-    const { vpn: newVpn, offset: newOffset, VAL: newVAL } = calcValues(vpn, offset, VAL);
-    setVpn(newVpn);
-    setOffset(newOffset);
-    setVAL(newVAL);
-    setFlag(1);
+    // const { vpn: newVpn, offset: newOffset, VAL: newVAL } = calcValues(vpn, offset, VAL);
+    const valResults = calcValues(vpn, offset, VAL);
+
+    setVpn(valResults[0]);
+    setOffset(valResults[1]);
+    setVAL(valResults[2]);
+    // setFlag(1);
 
     // Call function to set page number, size, and VAS size
-    // FIX THESE NAMES
-    const tests = calcSizes(newVpn, newOffset, newVAL);
-    setPages(Array(tests[0]).fill(null));
-    setPageSize(tests[1]);
-    setVasSize(tests[2]);
+    const sizeResults = calcSizes(valResults[0], valResults[1], valResults[2]);
+    setPagesV(Array(sizeResults[0]).fill(null));
+    let pageSize = converter(sizeResults[1]);
+    setPageSize(pageSize);
+
+    let VasSize = converter(sizeResults[2]);
+    setVasSize(VasSize);
   };
 
   return (
@@ -121,11 +119,11 @@ const Vas = () => {
       {/*NEW TEMP DIV FOR PAGE SIZE AND VAS SIZE*/}
       <div className="flex items-center ml-5">
         {/* Label for Page size */}
-        <label htmlFor="page-size">Page size (bytes): {pageSize} </label>
+        <label htmlFor="page-size">Page size: {pageSize} </label>
       </div>
       <div className="flex items-center ml-5">
         {/* Label for Virtual Address Space size */}
-        <label htmlFor="vas-size">Virtual Address Space size (bytes): {vasSize} </label>
+        <label htmlFor="vas-size">Virtual Address Space size: {vasSize} </label>
       </div>
   
 
@@ -135,7 +133,7 @@ const Vas = () => {
           {/* TODO: Currently just displaying a set number of pages, 
           arithmetic needs to be added to calculate number of pages based on above fields. 
           Also we need to generate fake addresses for each instead of just 1...n.*/}
-          {pages.map((page, index) => (
+          {pagesV.map((page, index) => (
             <div key={index} className="mt-5 bg-teal p-2 m-2 h-[200px] rounded-[10px]">
               Page {index + 1}
             </div>

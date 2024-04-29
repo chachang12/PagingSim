@@ -9,7 +9,6 @@ class PageTableEntry {
     this.pfn = pfn;
     this.validBit = validBit;
   }
-  // this is a test
 }
 
 export default PageTableEntry;

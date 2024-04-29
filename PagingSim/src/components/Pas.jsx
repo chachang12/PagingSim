@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
 import { plus, equal } from '../assets';
 import styles from '../style';
-import { calcValues, checkValue, calcSizes, test } from '../scripts/Functions';
+import { calcValues, checkValue, calcSizes, converter } from '../scripts/Functions';
 import { Context } from './Context';
 
 const Pas = () => {
 
-  const { vpn, setVpn, pfn, setPfn, offset, setOffset, PAL, setPAL } = React.useContext(Context);   // Include new vars and set funcitons here
-  // Create an array of 10 elements to represent the pages in the virtual address space
-  const [pages, setPages] = useState(Array(20).fill(null));
+  const { vpn, setVpn, pfn, setPfn, offset, setOffset, PAL, setPAL, frameSize, setFrameSize, pasSize, setPasSize, pagesP, setPagesP } = React.useContext(Context);   // Include new vars and set funcitons here
   // Flag to indicate if values need to be reset or not
   const [resetPFLag, setPFlag] = useState(0);
-  // Values for Page Frame size and PAS size
-  const [frameSize, setFrameSize] = useState(0);
-  const [pasSize, setPasSize] = useState(0);
 
   // After the user calculates, once a value if changed, all other values are set to 0 so a new value can be calculated.
   function checkReset() {
@@ -53,7 +48,6 @@ const Pas = () => {
 
   // Handles what happens on button press
   const handleClick = () => {
-
     // If any value is an empty string, set it to 0
     setPfn(pfn == '' ? 0 : pfn);
     setOffset(offset == '' ? 0 : offset);
@@ -61,21 +55,23 @@ const Pas = () => {
 
 
     // Function should stop and alert user if all three values are not 0
-    if (pfn != 0 && offset != 0 && PAL != 0) {
-      alert("At leat one value must be 0.")
-      return;
-    }
+    // if (pfn != 0 && offset != 0 && PAL != 0) {
+    //   alert("At leat one value must be 0.")
+    //   return;
+    // }
     // the set functions are delayed, so these new variables are used when the values are instantly needed
-    const { vpn: newPfn, offset: newOffset, VAL: newPAL } = calcValues(pfn, offset, PAL);
-    setPfn(newPfn);
-    setOffset(newOffset);
-    setPAL(newPAL);
-    setPFlag(1);
+    const valResults = calcValues(pfn, offset, PAL);
+    setPfn(valResults[0]);
+    setOffset(valResults[1]);
+    setPAL(valResults[2]);
+    // setPFlag(1);
 
-    const tests = calcSizes(newPfn, newOffset, newPAL);
-    setPages(Array(tests[0]).fill(null));
-    setFrameSize(tests[1]);
-    setPasSize(tests[2]);
+    const sizeResults = calcSizes(valResults[0], valResults[1], valResults[2]);
+    setPagesP(Array(sizeResults[0]).fill(null));
+    let pageFrame = converter(sizeResults[1]);
+    setFrameSize(pageFrame);
+    let PasSize = converter(sizeResults[2]);
+    setPasSize(PasSize);
   };
 
   return (
@@ -121,7 +117,7 @@ const Pas = () => {
         {/* TODO: Currently just displaying a set number of pages, 
           arithmetic needs to be added to caluclate number of pages based on above fields. 
           Also we need to generate fake addresses for each instead of just 1...n.*/}
-        {pages.map((page, index) => (
+        {pagesP.map((page, index) => (
 
           <div key={index} className="mt-5 w-[75px] bg-teal p-2 m-2 h-[200px] rounded-[10px]">
             Page Frame {index + 1}
