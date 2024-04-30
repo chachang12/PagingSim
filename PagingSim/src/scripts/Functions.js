@@ -5,10 +5,9 @@
 
 // TODO, RENAME STUFF TO WORK FOR PAS AND VAS
 
-// Returns the value if it is a positive int, if not it returns 0
-export function checkValue(input, original) {
-    console.log("original: ", original);
-    console.log("input:", input)
+// Returns the value if it is a positive int, if not it returns the original number.
+// If the flag is 0 the value cannot be larger then 16
+export function checkValue(input, original, flag) {
     let value = original;
     //let value = 0;
     if (!isNaN(input) && Number.isInteger(parseFloat(input)) && parseInt(input) >= 0) {
@@ -16,6 +15,10 @@ export function checkValue(input, original) {
     }
     if (input == "") {
         value = "";
+    }
+    if (flag == 0 && value > 16) {
+        alert("This value cannot be larger then 16.")
+        return original;
     }
     return value;
 }

@@ -24,7 +24,7 @@ const Pas = () => {
   const handlePfnChange = (event) => {
     checkReset();
     // Check if input is valid
-    let value = checkValue(event.target.value, pfn);
+    let value = checkValue(event.target.value, pfn, 0);
     setPfn(value);
     console.log('PFN:', value);
 
@@ -33,7 +33,7 @@ const Pas = () => {
   // Updates Offset value on change
   const handleOffsetChange = (event) => {
     checkReset();
-    let value = checkValue(event.target.value, offset);
+    let value = checkValue(event.target.value, offset, 1);
     setOffset(value);
     console.log('Offset:', value);
   };
@@ -41,7 +41,7 @@ const Pas = () => {
   // Updates PAL value on change
   const handlePALChange = (event) => {
     checkReset();
-    let value = checkValue(event.target.value, PAL);
+    let value = checkValue(event.target.value, PAL, 1);
     setPAL(value);
     console.log('PAL:', value);
   }

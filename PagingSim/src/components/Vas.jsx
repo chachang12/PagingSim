@@ -34,7 +34,7 @@ const Vas = () => {
   const handleVpnChange = (event) => {
     checkReset();
     // Check if input is valid
-    let value = checkValue(event.target.value, vpn);
+    let value = checkValue(event.target.value, vpn, 0);
     setVpn(value);
     console.log('VPN:', value);
   };
@@ -42,7 +42,7 @@ const Vas = () => {
   // Updates Offset value on change
   const handleOffsetChange = (event) => {
     checkReset();
-    let value = checkValue(event.target.value, offset);
+    let value = checkValue(event.target.value, offset, 1);
     setOffset(value);
     console.log('Offset:', value);
   };
@@ -50,7 +50,7 @@ const Vas = () => {
   // Updates VAL value on change
   const handleVALChange = (event) => {
     checkReset();
-    let value = checkValue(event.target.value, VAL);
+    let value = checkValue(event.target.value, VAL, 1);
     setVAL(value);
     console.log('VAL:', value);
   }

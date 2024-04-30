@@ -11,13 +11,13 @@ const Feature = () => {
   const [PAL, setPAL] = useState('0');
   const [frameSize, setFrameSize] = useState(0);
   const [pasSize, setPasSize] = useState(0);
-  const [pagesP, setPagesP] = useState(Array(20).fill(null));
+  const [pagesP, setPagesP] = useState(Array(1).fill(null));
   // VAS Vars
   const [vpn, setVpn] = useState('0');
   const [VAL, setVAL] = useState('0');
   const [pageSize, setPageSize] = useState(0);
   const [vasSize, setVasSize] = useState(0);
-  const [pagesV, setPagesV] = useState(Array(30).fill(null));
+  const [pagesV, setPagesV] = useState(Array(1).fill(null));
   // Page Table Vars
   const [Size, setSize] = useState('0');
   const [pte, setPte] = useState('0');

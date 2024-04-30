@@ -25,7 +25,7 @@ const PageTable = () => {
       setPageSize(pageSize);
       let VasSize = converter(vasSizeResults[2]);
       setVasSize(VasSize);
-      
+
       // PAS stuff
       setPfn(results[2]);
       const pasSizeResults = calcSizes(results[2], results[1], PAL)
@@ -47,14 +47,14 @@ const PageTable = () => {
   }
 
   const handlePteChange = (event) => {
-    let value = checkValue(event.target.value, pte);
+    let value = checkValue(event.target.value, pte, 2);
     setPte(value);
     // Sets the PTEs to be the same as the PTE number
     setPageTable(Array(value).fill(null).map((_, i) => new PageTableEntry(i, i, true)));
   }
-
+  // THIS FUNCTION NEEDS TO BE DELETED AS SIZA SHOULD NOT BE AN INPUT
   const handleSizeChange = (event) => {
-    let value = checkValue(event.target.value, pte);
+    let value = checkValue(event.target.value, pte, 1);
     setSize(value);
   }
 
