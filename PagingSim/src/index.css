@@ -21,6 +21,9 @@
 * {
   scroll-behavior: smooth;
 }
+.glow {
+  box-shadow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 3px #fff;
+}
 
 .text-gradient {
   background: radial-gradient(
@@ -141,4 +144,25 @@
 .white__gradient {
   background: rgba(255, 255, 255, 0.6);
   filter: blur(750px);
+}
+
+@font-face {
+  font-family: 'PierSans-Bold';
+  src: url('./assets/Font/PierSans-Bold.otf');
+}
+@font-face {
+  font-family: 'PierSans-Regular';
+  src: url('./assets/Font/PierSans-Regular.otf');
+}
+@font-face {
+  font-family: 'PierSans-Medium';
+  src: url('./assets/Font/PierSans-Medium.otf');
+}
+@font-face {
+  font-family: 'PierSans-Light';
+  src: url('./assets/Font/PierSans-Light.otf');
+}
+
+body {
+  font-family: 'PierSans-Bold', 'PierSans-Regular', 'PierSans-Medium', 'PierSans-Light';
 }

@@ -75,56 +75,60 @@ const Pas = () => {
   };
 
   return (
-    <div className='bg-seafoam w-[850] h-[400] rounded-lg'>
-      {/* Display the title */}
-      <span className="text-[24px] font-inter ml-5">Physical Address Space</span>
-      {/*Added button, needs formatting later*/}
-      <button id="calculate" onClick={handleClick} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">Calculate</button>
+<div className='bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-red-500 to-red-800 justify-center w-[925px] h-[400px] rounded-md '>       
+  <div className='flex items-center justify-between '>       
+    <span className="text-[24px] font-PierSans-Light text-white ml-5 ">Physical Address Space</span>
+    {/*Added button, needs formatting later*/}
+    <div className='py-3 px-5'>
+      <button id="calculate" onClick={handleClick} className="bg-gradient-to-r from-darkdarkBlue to-darkRed hover:from-red-500 hover:to--red-500 rounded text-white font-PierSans-Light w-[200px] h-[45px] leading-tight">Calculate</button>
+    </div>
+  </div>
 
       {/* Calculation Row */}
       <div className="flex items-center ml-5">
         {/* PFN */}
         <div>
-          <label htmlFor="pfn" className="block text-sm font-bold mb-2">PFN:</label>
+          <label htmlFor="pfn" className="block text-sm font-PierSans-Regular text-white mb-2">PFN:</label>
           <input id="pfn" type="text" value={pfn} onChange={handlePfnChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
         <img src={plus} alt="plus" className={`${styles.arithmetic}`} />
         {/* Offset */}
         <div>
-          <label htmlFor="offset" className="block text-sm font-bold mb-2">Offset:</label>
+          <label htmlFor="offset" className="block text-sm font-PierSans-Regular text-white mb-2">Offset:</label>
           <input id="offset" type="text" value={offset} onChange={handleOffsetChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
         <img src={equal} alt="equal" className={`${styles.arithmetic}`} />
         {/* VA Length */}
         <div>
-          <label htmlFor="palength" className="block text-sm font-bold mb-2">PA Length:</label>
+          <label htmlFor="palength" className="block text-sm font-PierSans-Regular text-white mb-2">PA Length:</label>
           <input id="palength" type="text" value={PAL} onChange={handlePALChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
       </div>
 
-      {/*NEW TEMP DIV FOR PAGE SIZE AND VAS SIZE*/}
-      <div className="flex items-center ml-5">
-        {/* Label for Page size */}
-        <label htmlFor="page-size">Page frame size (bytes): {frameSize} </label>
-      </div>
-      <div className="flex items-center ml-5">
-        {/* Label for Virtual Address Space size */}
-        <label htmlFor="vas-size">Physical Address Space size (bytes): {pasSize} </label>
-      </div>
-
       {/* Display the virtual address space */}
-      <div className='flex flex-row ml-5 w-[850px] overflow-x-auto'>
+      <div className='flex flex-row ml-5 w-[850px] overflow-x-auto pt-5'>
         {/* TODO: Currently just displaying a set number of pages, 
           arithmetic needs to be added to caluclate number of pages based on above fields. 
           Also we need to generate fake addresses for each instead of just 1...n.*/}
         {pagesP.map((page, index) => (
 
-          <div key={index} className="mt-5 w-[75px] bg-teal p-2 m-2 h-[200px] rounded-[10px]">
-            Page Frame {index + 1}
+          <div key={index} className="flex justify-center mt-5 w-[75px] h-[100px] bg-gradient-to-r from-darkdarkBlue to-darkRed font-PierSans-Regular text-white p-10 m-1  rounded-md">
+            PF {index + 1}
           </div>
         ))}
       </div>
-
+      <div className="flex justify-center pt-10">
+        <div className="flex items-center ml-5">
+        {/* Label for Page size */}
+        <label className="font-PierSans-Regular text-white" htmlFor="page-size">Page frame size: {frameSize} </label>
+        </div>
+          <div className="flex items-center ml-5">
+          {/* Label for Virtual Address Space size */}
+          <label className="font-PierSans-Regular text-white" htmlFor="vas-size">Physical Address Space size: {pasSize} </label>
+        </div>
+      </div>
+      
+      
     </div>
 
   )

@@ -70,42 +70,49 @@ const PageTable = () => {
 
   // END OF TESTING
   return (
-    <div className='bg-seafoam rounded-lg flex flex-col items-start p-4'>
-      <span className="text-[24px] font-inter mb-4">Page Table</span>
-      {/*button needs styling */}
-      <button id="calculate" onClick={handleClick} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">Calculate</button>
+    <div className='bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-red-500 to-red-800 rounded-md flex flex-col items-start p-4 w-[475px] h-[840px]'>
+      <div className='flex items-center justify-between w-[425px]'>       
+        <span className="text-[24px] font-PierSans-Light text-white pl-5">Page Table</span>
+        {/*Added button, needs formatting later*/}
+        <div className='py-3 px-5'>
+          <button id="calculate" onClick={handleClick} className="bg-gradient-to-r from-darkdarkBlue to-darkRed hover:from-red-500 hover:to--red-500 rounded text-white font-PierSans-Light w-[150px] h-[45px] leading-tight">Calculate</button>
+        </div>
+      </div>
       {/* PT Size */}
       <div className="flex items-center mb-2">
         {/* I dont think size should be an input field */}
-        <label htmlFor="size" className="mr-2">PT Size btyes:</label>
-        <input id="size" type="text" value={Size} onChange={handleSizeChange} className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        <label htmlFor="size" className="mr-2 font-PierSans-Regular text-white">PT Size btyes: {Size}</label>
+        
       </div>
       {/* PTE */}
-      <div className="flex items-center mb-3">
-        <label htmlFor="pte" className="mr-2">PTE Number:</label>
+      <div className="flex items-center mb-3 pt-3">
+        <label htmlFor="pte" className="mr-2 font-PierSans-Regular text-white">PTE Number:</label>
         <input id="pte" type="text" value={pte} onChange={handlePteChange} className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
       </div>
 
-      {/* TESTING STUFF */}
-      <div>
-      <input type="range" min="0" max="100" value={percentTrue} onChange={handleSliderChange} />
-      <button onClick={setRandomPageTable}>Set Page Table</button>
-    </div>
+
 
       {/* Display the page table */}
-      <div className="h-[520px] overflow-auto">
+      <div className="h-[800px] overflow-auto">
         {/* Labels */}
-        <div className="ml-5 mr-5 flex justify-between font-bold mb-2 px-2">
+        <div className="ml-5 mr-5 flex justify-between font-bold mb-2 px-2 font-PierSans-Light text-white">
           <div>VPN</div>
           <div>PFN</div>
           <div>Valid Bit</div>
         </div>
         {pageTable.map((pte, index) => (
-          <div key={index} className="bg-teal flex justify-between w-full h-[50px] items-center mb-3 rounded-lg p-2">
-            <div className={`${styles.ptevalue}`}>{pte.vpn}</div> 
-            <div className={`${styles.ptevalue}`}>{pte.pfn}</div>
-            <div className={`${styles.ptevalue}`}>{pte.validBit ? 'Yes' : 'No'}</div>
+          <div key={index} className="bg-gradient-to-r from-darkdarkBlue to-darkRed flex justify-between w-full h-[50px] font-PierSans-Light text-white items-center mb-3 rounded-md p-2">
+            <div className='flex'> 
+              <div className={`${styles.ptevalue}`}>{pte.vpn}</div> 
+              <div className='flex pl-10'>
+                <div className={`${styles.ptevalue}`}>{pte.pfn}</div>
+                <div className={`${styles.ptevalue}`}>{pte.validBit ? 'Yes' : 'No'}</div>
+              </div>
+            </div>
+            
+            
           </div>
+          
         ))}
       </div>
 

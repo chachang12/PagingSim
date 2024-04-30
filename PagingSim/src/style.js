@@ -16,7 +16,9 @@ const styles = {
 
     arithmetic: "ml-7 mr-7 mt-5 w-[25px] h-[25px]",
 
-    ptevalue: "bg-seafoam w-[100px] mx-2 px-[55px] rounded-md"
+    ptevalue: "bg-red-500 w-[100px] mx-2 px-[55px] rounded-sm",
+
+    gradient: "bg-gradient-to-r from-slate-900 to-slate-700",
   };
   
   export const layout = {
