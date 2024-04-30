@@ -54,11 +54,7 @@ const Pas = () => {
     setPAL(PAL == '' ? 0 : PAL);
 
 
-    // Function should stop and alert user if all three values are not 0
-    // if (pfn != 0 && offset != 0 && PAL != 0) {
-    //   alert("At leat one value must be 0.")
-    //   return;
-    // }
+
     // the set functions are delayed, so these new variables are used when the values are instantly needed
     const valResults = calcValues(pfn, offset, PAL);
     setPfn(valResults[0]);
@@ -107,9 +103,6 @@ const Pas = () => {
 
       {/* Display the virtual address space */}
       <div className='flex flex-row ml-5 w-[850px] overflow-x-auto pt-5'>
-        {/* TODO: Currently just displaying a set number of pages, 
-          arithmetic needs to be added to caluclate number of pages based on above fields. 
-          Also we need to generate fake addresses for each instead of just 1...n.*/}
         {pagesP.map((page, index) => (
 
           <div key={index} className="flex justify-center mt-5 w-[75px] h-[100px] bg-gradient-to-r from-darkdarkBlue to-darkRed font-PierSans-Regular text-white p-10 m-1  rounded-md">

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { plus, equal } from '../assets';
 import styles from '../style';
 import { calcValues, checkValue, calcSizes, converter } from '../scripts/Functions';
-// import { pfn, pfsetPfnn } from './Pas';
 import { Context } from './Context';
 import PageTableEntry from '../scripts/classes/PageTableEntry';
 
@@ -12,13 +11,8 @@ import PageTableEntry from '../scripts/classes/PageTableEntry';
  */
 const Vas = () => {
   const { vpn, setVpn, pfn, setPfn, offset, setOffset, VAL, setVAL, pte, setPte, pageSize, setPageSize, vasSize, setVasSize, pagesV, setPagesV } = React.useContext(Context);
-  // Create an array of 10 elements to represent the pages in the virtual address space
-  // const [pages, setPages] = useState(Array(30).fill(null));
-  // Flag to indicate if values need to be reset or not
   const [resetFLag, setFlag] = useState(0);
-  // Values for Page size and VAS size
-  // const [pageSize, setPageSize] = useState(0);
-  // const [vasSize, setVasSize] = useState(0);
+
 
   // After the user calculates, once a value if changed, all other values are set to 0 so a new value can be calculated.
   function checkReset() {

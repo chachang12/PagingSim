@@ -1,10 +1,7 @@
-// import { useState } from "react";
 import { reset, jclogo, info } from '../assets';
-// import { Context } from '../components/Context';
-
 import React, { useState } from 'react';
-// import { reset, jclogo } from '../assets';
 import { Context } from './Context';
+import PageTableEntry from '../scripts/classes/PageTableEntry';
 
 
 const NavigationBar = () => {
@@ -20,14 +17,14 @@ const NavigationBar = () => {
         setVAL('0');
         setPAL('0');
         setPte('0');
-        setPageTable('0');
+        setPageTable(Array(1).fill(null).map((_, i) => new PageTableEntry(i, i, true)));
         setSize('0');
         setFrameSize('0');
         setPasSize('0');
-        setPagesP('0');
+        setPagesP(Array(1).fill(null));
         setPageSize('0');
         setVasSize('0');
-        setPagesV('0');
+        setPagesV(Array(1).fill(null));
         console.log("Reset button clicked");
     }
 
