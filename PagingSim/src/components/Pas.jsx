@@ -24,7 +24,7 @@ const Pas = () => {
   const handlePfnChange = (event) => {
     checkReset();
     // Check if input is valid
-    let value = checkValue(event.target.value, pfn, 0);
+    let value = checkValue(event.target.value, pfn);
     setPfn(value);
     console.log('PFN:', value);
 
@@ -33,7 +33,7 @@ const Pas = () => {
   // Updates Offset value on change
   const handleOffsetChange = (event) => {
     checkReset();
-    let value = checkValue(event.target.value, offset, 1);
+    let value = checkValue(event.target.value, offset);
     setOffset(value);
     console.log('Offset:', value);
   };
@@ -41,7 +41,7 @@ const Pas = () => {
   // Updates PAL value on change
   const handlePALChange = (event) => {
     checkReset();
-    let value = checkValue(event.target.value, PAL, 1);
+    let value = checkValue(event.target.value, PAL);
     setPAL(value);
     console.log('PAL:', value);
   }
@@ -53,7 +53,10 @@ const Pas = () => {
     setOffset(offset == '' ? 0 : offset);
     setPAL(PAL == '' ? 0 : PAL);
 
-
+    if (vpn > 30) {
+      alert("You can't set your PFN above 30 bits.")
+      return
+    }
 
     // the set functions are delayed, so these new variables are used when the values are instantly needed
     const valResults = calcValues(pfn, offset, PAL);
@@ -63,7 +66,12 @@ const Pas = () => {
     // setPFlag(1);
 
     const sizeResults = calcSizes(valResults[0], valResults[1], valResults[2]);
-    setPagesP(Array(sizeResults[0]).fill(null));
+
+    if (valResults[0] > 14) {
+      alert("Your PFN is to high for this program to visual the pages. The max is 14 bit PFNs. However all other values are correct.")
+    } else {
+      setPagesP(Array(sizeResults[0]).fill(null));
+    }
     let pageFrame = converter(sizeResults[1]);
     setFrameSize(pageFrame);
     let PasSize = converter(sizeResults[2]);

@@ -28,7 +28,7 @@ const Vas = () => {
   const handleVpnChange = (event) => {
     checkReset();
     // Check if input is valid
-    let value = checkValue(event.target.value, vpn, 0);
+    let value = checkValue(event.target.value, vpn);
     setVpn(value);
     console.log('VPN:', value);
   };
@@ -36,7 +36,7 @@ const Vas = () => {
   // Updates Offset value on change
   const handleOffsetChange = (event) => {
     checkReset();
-    let value = checkValue(event.target.value, offset, 1);
+    let value = checkValue(event.target.value, offset);
     setOffset(value);
     console.log('Offset:', value);
   };
@@ -44,7 +44,7 @@ const Vas = () => {
   // Updates VAL value on change
   const handleVALChange = (event) => {
     checkReset();
-    let value = checkValue(event.target.value, VAL, 1);
+    let value = checkValue(event.target.value, VAL);
     setVAL(value);
     console.log('VAL:', value);
   }
@@ -56,14 +56,12 @@ const Vas = () => {
     setOffset(offset == '' ? 0 : offset);
     setVAL(VAL == '' ? 0 : VAL);
 
-    // Function should stop and alert user if all three values are not 0
-    // if (vpn != 0 && offset != 0 && VAL != 0) {
-    //   alert("At leat one value must be 0.")
-    //   return;
-    // }
+    if (vpn > 30) {
+      alert("You can't set your VPN above 30 bits.")
+      return
+    }
 
     // the set functions are delayed, so these new variables are used when the values are instantly needed
-    // const { vpn: newVpn, offset: newOffset, VAL: newVAL } = calcValues(vpn, offset, VAL);
     const valResults = calcValues(vpn, offset, VAL);
 
     setVpn(valResults[0]);
@@ -73,7 +71,12 @@ const Vas = () => {
 
     // Call function to set page number, size, and VAS size
     const sizeResults = calcSizes(valResults[0], valResults[1], valResults[2]);
-    setPagesV(Array(sizeResults[0]).fill(null));
+    // Prevent the pages from generating past 14 bit vpns
+    if (valResults[0] > 14) {
+      alert("Your VPN is to high for this program to visual the pages. The max is 14 bit VPNs. However all other values are correct.")
+    } else {
+      setPagesV(Array(sizeResults[0]).fill(null));
+    }
     let pageSize = converter(sizeResults[1]);
     setPageSize(pageSize);
 

@@ -7,7 +7,7 @@
 
 // Returns the value if it is a positive int, if not it returns the original number.
 // If the flag is 0 the value cannot be larger then 16
-export function checkValue(input, original, flag) {
+export function checkValue(input, original) {
     let value = original;
     //let value = 0;
     if (!isNaN(input) && Number.isInteger(parseFloat(input)) && parseInt(input) >= 0) {
@@ -15,10 +15,6 @@ export function checkValue(input, original, flag) {
     }
     if (input == "") {
         value = "";
-    }
-    if (flag == 0 && value > 16) {
-        alert("This value cannot be larger then 16.")
-        return original;
     }
     return value;
 }
@@ -85,15 +81,23 @@ export function calcFromPTE(VAL, PAL, pte) {
 }
 
 export function converter(size) {
-   let finalSize = size+ " bytes"
+    let finalSize = size + " bytes";
     if (size > 1024) {
-        finalSize = (size/1024) + " KiB";
+        finalSize = (size / 1024) + " KiB";
     } 
     if (size > 1048576) {
-        finalSize = (size/1048576) + " MiB";
+        finalSize = (size / 1048576) + " MiB";
     }
-    return finalSize
+    if (size > 1073741824) {
+        finalSize = (size / 1073741824) + " GiB";
+    }
+    if (size > 1099511627776) {
+        finalSize = (size / 1099511627776) + " TiB";
+    }
+    // You can continue adding more conditions for higher units as needed
+    return finalSize;
 }
+
 
 
 export function test(vpn, offset, VAL) {
