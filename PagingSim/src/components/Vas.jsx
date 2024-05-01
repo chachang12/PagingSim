@@ -73,7 +73,7 @@ const Vas = () => {
     const sizeResults = calcSizes(valResults[0], valResults[1], valResults[2]);
     // Prevent the pages from generating past 14 bit vpns
     if (valResults[0] > 14) {
-      alert("Your VPN is to high for this program to visual the pages. The max is 14 bit VPNs. However all other values are correct.")
+      alert("Your VPN is too high for this program to visual the pages. The max is 14 bit VPNs. However all other values are correct.")
     } else {
       setPagesV(Array(sizeResults[0]).fill(null));
     }

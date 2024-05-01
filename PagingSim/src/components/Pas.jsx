@@ -68,7 +68,7 @@ const Pas = () => {
     const sizeResults = calcSizes(valResults[0], valResults[1], valResults[2]);
 
     if (valResults[0] > 14) {
-      alert("Your PFN is to high for this program to visual the pages. The max is 14 bit PFNs. However all other values are correct.")
+      alert("Your PFN is too high for this program to visual the pages. The max is 14 bit PFNs. However all other values are correct.")
     } else {
       setPagesP(Array(sizeResults[0]).fill(null));
     }

@@ -22,7 +22,7 @@ const PageTable = () => {
       const vasSizeResults = calcSizes(results[0], results[1], VAL);
       // Prevent the pages from generating past 14 bit vpns
       if (results[0] > 14) {
-        alert("Your VPN was to high for this program to visual the pages. The max is 14 bit VPNs. However all other values are correct.")
+        alert("Your VPN was too high for this program to visual the pages. The max is 14 bit VPNs. However all other values are correct.")
       } else {
         setPagesV(Array(vasSizeResults[0]).fill(null));
       }
@@ -36,7 +36,7 @@ const PageTable = () => {
       const pasSizeResults = calcSizes(results[2], results[1], PAL)
       // Prevent the pages from generating past 14 bit pfns
       if (results[2] > 14) {
-        alert("Your PFN was to high for this program to visual the page frames. The max is 14 bit PFNs. However all other values are correct.")
+        alert("Your PFN was too high for this program to visual the page frames. The max is 14 bit PFNs. However all other values are correct.")
       } else {
         setPagesP(Array(pasSizeResults[0]).fill(null))
       }
