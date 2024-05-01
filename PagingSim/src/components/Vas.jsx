@@ -97,19 +97,19 @@ const Vas = () => {
       <div className="flex items-center ml-5">
         {/* VPN */}
         <div>
-          <label htmlFor="vpn" className="block text-sm font-PierSans-Regular text-white mb-2">VPN:</label>
+          <label htmlFor="vpn" className="block text-sm font-PierSans-Regular text-white mb-2">VPN Length (bits):</label>
           <input id="vpn" type="text" value={vpn} onChange={handleVpnChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
         <img src={plus} alt="plus" className={`${styles.arithmetic}`} />
         {/* Offset */}
         <div>
-          <label htmlFor="offset" className="block text-sm font-PierSans-Regular text-white mb-2">Offset:</label>
+          <label htmlFor="offset" className="block text-sm font-PierSans-Regular text-white mb-2">Offset Length (bits):</label>
           <input id="offset" type="text" value={offset} onChange={handleOffsetChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
         <img src={equal} alt="equal" className={`${styles.arithmetic}`} />
         {/* VA Length */}
         <div>
-          <label htmlFor="valength" className="block text-sm font-PierSans-Regular text-white mb-2">VA Length:</label>
+          <label htmlFor="valength" className="block text-sm font-PierSans-Regular text-white mb-2">VA Length (bits):</label>
           <input id="valength" type="text" value={VAL} onChange={handleVALChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
       </div>

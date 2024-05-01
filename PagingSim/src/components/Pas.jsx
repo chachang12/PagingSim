@@ -92,19 +92,19 @@ const Pas = () => {
       <div className="flex items-center ml-5">
         {/* PFN */}
         <div>
-          <label htmlFor="pfn" className="block text-sm font-PierSans-Regular text-white mb-2">PFN:</label>
+          <label htmlFor="pfn" className="block text-sm font-PierSans-Regular text-white mb-2">PFN Length (bits):</label>
           <input id="pfn" type="text" value={pfn} onChange={handlePfnChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
         <img src={plus} alt="plus" className={`${styles.arithmetic}`} />
         {/* Offset */}
         <div>
-          <label htmlFor="offset" className="block text-sm font-PierSans-Regular text-white mb-2">Offset:</label>
+          <label htmlFor="offset" className="block text-sm font-PierSans-Regular text-white mb-2">Offset Length (bits):</label>
           <input id="offset" type="text" value={offset} onChange={handleOffsetChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
         <img src={equal} alt="equal" className={`${styles.arithmetic}`} />
         {/* VA Length */}
         <div>
-          <label htmlFor="palength" className="block text-sm font-PierSans-Regular text-white mb-2">PA Length:</label>
+          <label htmlFor="palength" className="block text-sm font-PierSans-Regular text-white mb-2">PA Length (bits):</label>
           <input id="palength" type="text" value={PAL} onChange={handlePALChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
       </div>
